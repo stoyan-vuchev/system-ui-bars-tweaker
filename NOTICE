@@ -1,0 +1,29 @@
+Apache Licensed Code Notice
+============================
+
+This project includes code that is licensed under the Apache License, Version 2.0.
+Below is the required NOTICE text for this project:
+
+1. Portions of this software are copyright 2022 The Android Open Source Project.
+
+   - Original code from Accompanist - System UI Controller for Jetpack Compose.
+   - Original code licensed under the Apache License, Version 2.0 (the "License").
+
+2. Modifications:
+   
+   - The majority of the code in this project has been extensively modified and adapted
+   to suit the specific requirements and functionality of this project.
+
+3. License Information:
+
+   - The original code is licensed under the Apache License, Version 2.0.
+   - A copy of the Apache License, Version 2.0 can be found inside the LICENSE file.
+
+4. Original Code Attribution:
+
+   - The original code and its copyright notice can be found at:
+   https://github.com/stoyan-vuchev/accompanist/blob/compose-1.5/systemuicontroller/src/main/java/com/google/accompanist/systemuicontroller/SystemUiController.kt
+
+Please note that this NOTICE file is provided for informational purposes
+and should be included in your project's distribution to comply with the Apache License, Version 2.0.
+You may need to customize this NOTICE file to match the specifics of your project and the original code you have modified.
