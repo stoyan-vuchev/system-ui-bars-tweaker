@@ -86,7 +86,7 @@ fun ApplicationTheme(
 }
 ```
 
-* If you don't want to use the Provider and Consumer approach, you can simply create an instance using a `rememberSystemUIBarsTweaker()` composable.
+* If you don't want to use the Producer and Consumer approach, you can simply create an instance using a `rememberSystemUIBarsTweaker()` composable.
 
 ``` kotlin
 val tweaker = rememberSystemUIBarsTweaker()
