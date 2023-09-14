@@ -1,4 +1,6 @@
-# System UI Bars Tweaker [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
+![](./docs/header.png)
+
+[![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
 
 > A Jetpack Compose library for Android that continues the legacy of the Accompanist System UI Controller, with easy-to-use utilities to tweak the color, behavior, and visibility of the System UI bars.
 
