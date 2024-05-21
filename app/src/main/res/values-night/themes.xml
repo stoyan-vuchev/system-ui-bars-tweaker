@@ -2,8 +2,9 @@
 <resources>
 
     <style name="Theme.SystemUIBarsTweaker" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">#FF191C1D</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/purple_500</item>
+        <item name="android:navigationBarColor">#80000000</item>
     </style>
 
 </resources>
