@@ -48,7 +48,7 @@ class SystemBarStyle(
          **/
         @Composable
         fun defaultStatusBarStyle(
-            color: Color = Color.Transparent,
+            color: Color = Color.Unspecified,
             darkIcons: Boolean = !isSystemInDarkTheme(),
             enforceContrast: Boolean = false
         ) = SystemBarStyle(
@@ -66,7 +66,7 @@ class SystemBarStyle(
          **/
         @Composable
         fun defaultNavigationBarStyle(
-            color: Color = Color.Transparent,
+            color: Color = Color.Unspecified,
             darkIcons: Boolean = !isSystemInDarkTheme(),
             enforceContrast: Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.O
         ) = SystemBarStyle(

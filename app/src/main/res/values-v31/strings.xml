@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==================== Application ==================== -->
+
+    <!-- Color Scheme -->
+    <string name="color_scheme_dynamic_description">Using the Dynamic color scheme.</string>
+
+    <!-- ==================== Dialog ==================== -->
+
+    <!-- Color Scheme Dialog -->
+    <string name="dialog_color_scheme_dynamic_label">Dynamic</string>
+    <string name="dialog_color_scheme_dynamic_description">The App will adapt to the Dynamic colors.</string>
+
+</resources>

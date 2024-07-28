@@ -1,3 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">System UI Bars Tweaker</string>
+
+    <!-- ==================== Application ==================== -->
+
+    <!-- Application Name -->
+    <string name="app_name">System UI Bars Tweaker Demo</string>
+
+    <!-- Theme Mode -->
+    <string name="theme_mode_light_description">Using the Light theme.</string>
+    <string name="theme_mode_dark_description">Using the Dark theme.</string>
+
+    <!-- Color Scheme -->
+    <string name="color_scheme_default_description">Using the Default color scheme.</string>
+    <string name="color_scheme_lavender_description">Using the M3 Lavender color scheme.</string>
+
+    <!-- ==================== Dialog ==================== -->
+
+    <!-- Basic Actions -->
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_action_apply">Apply</string>
+
+    <!-- System UI Bars Tweaks Dialog -->
+    <string name="dialog_system_ui_bars_tweaks_title">System UI Bars</string>
+    <string name="dialog_system_ui_bars_tweaks_translucent_status_bar_item_label">Translucent Status Bar</string>
+    <string name="dialog_system_ui_bars_tweaks_translucent_status_bar_item_description">Makes the Status Bar fully transparent.</string>
+    <string name="dialog_system_ui_bars_tweaks_translucent_nav_bar_item_label">Translucent Nav Bar</string>
+    <string name="dialog_system_ui_bars_tweaks_translucent_nav_bar_item_description">Makes the Nav Bar fully transparent.</string>
+    <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_label">Status Bar contrast</string>
+    <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_description">Applies a slightly opaque scrim to the Status Bar.</string>
+    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label">Nav Bar contrast</string>
+    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description">Applies a slightly opaque scrim to the Nav Bar.</string>
+
+    <!-- Theme Mode Dialog -->
+    <string name="dialog_theme_mode_title">Theme</string>
+    <string name="dialog_theme_mode_light_label">Light</string>
+    <string name="dialog_theme_mode_light_description">Light theme will be applied.</string>
+    <string name="dialog_theme_mode_dark_label">Dark</string>
+    <string name="dialog_theme_mode_dark_description">Dark theme will be applied.</string>
+
+    <!-- Color Scheme Dialog -->
+    <string name="dialog_color_scheme_title">Color Scheme</string>
+    <string name="dialog_color_scheme_default_label">Default</string>
+    <string name="dialog_color_scheme_default_description">Default color scheme will be applied.</string>
+    <string name="dialog_color_scheme_lavender_label">Lavender</string>
+    <string name="dialog_color_scheme_lavender_description">M3 Lavender color scheme will be applied.</string>
+
+    <!-- ==================== Tweaks ==================== -->
+
+    <!-- Recommended Tweaks -->
+    <string name="recommended_tweaks">Recommended Tweaks</string>
+    <string name="recommended_tweaks_translucent_status_bar">Translucent Status Bar.</string>
+    <string name="recommended_tweaks_translucent_nav_bar">Translucent Nav Bar.</string>
+    <string name="recommended_tweaks_nav_bar_contrast">Nav Bar contrast (for non-gesture navigation).</string>
+
+    <!-- ==================== Docs ==================== -->
+
+    <!-- Docs Screen -->
+    <string name="docs_screen_label">Docs</string>
+    <string name="docs_screen_introduction">Here you can find the documentation guides and references of how to implement the System UI Bars Tweaker.</string>
+
+    <!-- ==================== Examples ==================== -->
+
+    <!-- Examples Screen -->
+    <string name="examples_screen_label">Examples</string>
+    <string name="examples_screen_introduction">Here you can find examples of different app screens with System UI Bars tweaks recommendations. Feel free experimenting and applying tweaks you like.</string>
+
+    <!-- Articles Example -->
+    <string name="examples_articles_name">Articles</string>
+    <string name="examples_articles_description">An example of a screen with articles showing behind the Nav Bar.</string>
+
+    <!-- Photos Example -->
+    <string name="examples_photos_name">Photos</string>
+    <string name="examples_photos_description">An example of a screen with photos showing behind the System UI Bars, with the ability to tweak their behavior and visibility.</string>
+    <string name="examples_photos_category_landscapes_label">Landscapes</string>
+    <string name="examples_photos_category_cats_label">Cats</string>
+    <string name="examples_photos_category_flowers_label">Flowers</string>
+
+    <!-- ==================== Settings ==================== -->
+
+    <!-- Settings Screen -->
+    <string name="settings_screen_label">Settings</string>
+    <string name="settings_screen_introduction">From this screen, you can change the application settings to your liking, organized by categories.</string>
+
+    <!-- Settings category: General -->
+    <string name="settings_category_general_label">General</string>
+    <string name="settings_category_general_theme_item_label">Theme</string>
+    <string name="settings_category_general_color_scheme_item_label">Color Scheme</string>
+    <string name="settings_category_general_system_ui_bars_item_label">System UI Bars</string>
+    <string name="settings_category_general_system_ui_bars_item_description">Tweak the System UI Bars.</string>
+
+    <!-- Settings category: Other -->
+    <string name="settings_category_other_label">Other</string>
+    <string name="settings_category_other_about_item_label">About</string>
+    <string name="settings_category_other_about_item_description">Information about the app.</string>
+
 </resources>

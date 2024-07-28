@@ -113,6 +113,11 @@ interface SystemUIBarsTweaker {
     val systemBarsBehavior: Int
 
     /**
+     * Returns the currently applied Status Bar [SystemUIBarsConfiguration].
+     **/
+    val systemUIBarsConfiguration: SystemUIBarsConfiguration
+
+    /**
      * Functionality that allows the UI to be drawn under the system bars (a.k.a. Edge-To-Edge).
      *
      * @param enabled whether to enable or disable Edge-To-Edge.
@@ -169,6 +174,13 @@ interface SystemUIBarsTweaker {
      **/
     fun tweakSystemBarsBehavior(behavior: Int)
 
+    /**
+     * Functionality for tweaking the [SystemUIBarsConfiguration].
+     *
+     * @param systemUIBarsConfiguration the configuration to be applied.
+     **/
+    fun tweakSystemUIBarsConfiguration(systemUIBarsConfiguration: SystemUIBarsConfiguration)
+
 }
 
 /**
@@ -195,39 +207,28 @@ internal class SystemUIBarsTweakerImpl(
         WindowCompat.getInsetsController(it, view)
     }
 
-    override var isStatusBarVisible: Boolean =
+    override var isStatusBarVisible =
         rootWindowInsets?.isVisible(WindowInsetsCompat.Type.statusBars()) == true
         private set
 
-    override var isNavigationBarVisible: Boolean =
+    override var isNavigationBarVisible =
         rootWindowInsets?.isVisible(WindowInsetsCompat.Type.navigationBars()) == true
         private set
 
-    override var isEdgeToEdgeEnabled: Boolean = !view.fitsSystemWindows
+    override var isEdgeToEdgeEnabled = !view.fitsSystemWindows
         private set
 
-    override var statusBarStyle: SystemBarStyle = initialConfiguration.statusBarStyle
+    override var statusBarStyle = initialConfiguration.statusBarStyle
         private set
 
-    override var navigationBarStyle: SystemBarStyle = initialConfiguration.navigationBarStyle
+    override var navigationBarStyle = initialConfiguration.navigationBarStyle
         private set
 
-    override var systemBarsBehavior: Int =
-        windowInsetsController?.systemBarsBehavior ?: BEHAVIOR_DEFAULT
+    override var systemBarsBehavior = windowInsetsController?.systemBarsBehavior
+        ?: BEHAVIOR_DEFAULT
         private set
 
-    init {
-
-        // Apply the initial Edge-To-Edge configuration value.
-        enableEdgeToEdge(enabled = initialConfiguration.enableEdgeToEdge)
-
-        // Apply the initial System Bars configuration styles.
-        tweakSystemBarsStyle(
-            statusBarStyle = initialConfiguration.statusBarStyle,
-            navigationBarStyle = initialConfiguration.navigationBarStyle
-        )
-
-    }
+    override var systemUIBarsConfiguration = initialConfiguration
 
     // Attempt to enable or disable Edge-To-Edge if the [window] is not null.
     override fun enableEdgeToEdge(enabled: Boolean) {
@@ -362,6 +363,18 @@ internal class SystemUIBarsTweakerImpl(
         windowInsetsController?.run {
             this.systemBarsBehavior = behavior
         }?.let { this.systemBarsBehavior = behavior }
+    }
+
+    // Attempt to tweak th System UI Bars Configuration.
+    override fun tweakSystemUIBarsConfiguration(
+        systemUIBarsConfiguration: SystemUIBarsConfiguration
+    ) {
+        enableEdgeToEdge(systemUIBarsConfiguration.enableEdgeToEdge)
+        tweakStatusBarStyle(systemUIBarsConfiguration.statusBarStyle)
+        tweakNavigationBarStyle(systemUIBarsConfiguration.navigationBarStyle)
+        tweakSystemBarsBehavior(systemUIBarsConfiguration.systemBarsBehavior)
+        tweakStatusBarVisibility(systemUIBarsConfiguration.isStatusBarVisible)
+        tweakStatusBarVisibility(systemUIBarsConfiguration.isNavigationBarVisible)
     }
 
 }
