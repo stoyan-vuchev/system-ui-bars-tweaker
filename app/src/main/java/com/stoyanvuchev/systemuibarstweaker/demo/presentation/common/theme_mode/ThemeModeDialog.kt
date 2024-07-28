@@ -11,13 +11,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -73,7 +72,7 @@ fun ThemeModeDialog(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 0.dp)
                     .clip(RoundedCornerShape(50))
@@ -81,7 +80,6 @@ fun ThemeModeDialog(
 
             Spacer(modifier = Modifier.height(6.dp))
 
-            @Stable
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 
                 RadioButtonItem(
@@ -91,7 +89,7 @@ fun ThemeModeDialog(
                     onClick = { newThemeMode = ThemeMode.System }
                 )
 
-                Divider(
+                HorizontalDivider(
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp)
                 )
 
@@ -104,7 +102,7 @@ fun ThemeModeDialog(
                 onClick = { newThemeMode = ThemeMode.Light }
             )
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier.padding(start = 24.dp, end = 24.dp)
             )
 
@@ -117,7 +115,7 @@ fun ThemeModeDialog(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 0.dp)
                     .clip(RoundedCornerShape(50))

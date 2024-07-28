@@ -1,7 +1,6 @@
 package com.stoyanvuchev.systemuibarstweaker.demo.presentation
 
 import androidx.compose.runtime.Immutable
-import com.stoyanvuchev.systemuibarstweaker.demo.presentation.docs.DocsScreenDestinations
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.examples.ExamplesScreenDestinations
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.settings.SettingsScreenDestinations
 import kotlinx.collections.immutable.persistentListOf
@@ -18,7 +17,6 @@ object AppNavigationDestinations {
      **/
     val navigationDestinations
         get() = persistentListOf(
-            DocsScreenDestinations.Docs,
             ExamplesScreenDestinations.Examples,
             SettingsScreenDestinations.Settings
         )

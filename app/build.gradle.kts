@@ -1,19 +1,19 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.compose)
 }
 
 android {
 
     namespace = "com.stoyanvuchev.systemuibarstweaker.demo"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
 
         applicationId = "com.stoyanvuchev.systemuibarstweaker.demo"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -43,7 +43,6 @@ android {
     }
 
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
 
     packaging {
         resources {

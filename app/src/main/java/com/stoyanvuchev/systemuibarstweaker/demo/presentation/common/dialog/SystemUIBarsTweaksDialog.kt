@@ -13,7 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -92,7 +92,7 @@ fun SystemUIBarsTweaksDialog(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 0.dp)
                     .clip(RoundedCornerShape(50))
@@ -116,7 +116,7 @@ fun SystemUIBarsTweaksDialog(
                     }
                 )
 
-                Divider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
+                HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_translucent_nav_bar_item_label),
@@ -127,7 +127,7 @@ fun SystemUIBarsTweaksDialog(
                     }
                 )
 
-                Divider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
+                HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_status_bar_contrast_item_label),
@@ -138,7 +138,7 @@ fun SystemUIBarsTweaksDialog(
                     }
                 )
 
-                Divider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
+                HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label),
@@ -153,7 +153,7 @@ fun SystemUIBarsTweaksDialog(
 
             }
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 0.dp)
                     .clip(RoundedCornerShape(50))
