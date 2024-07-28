@@ -1,40 +1,51 @@
 ![](./docs/header.png)
 
 [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
+[![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
-> A Jetpack Compose library for Android that continues the legacy of the Accompanist System UI Controller, with easy-to-use utilities to tweak the color, behavior, and visibility of the System UI bars.
+> A Jetpack Compose library for Android with easy-to-use utilities to tweak the color, behavior, and visibility of the System UI bars.
 
 ## Table of Contents
 
 * [Introduction](#introduction)
 * [Usage](#usage)
-* [Requirements](#requirements)
 * [Gradle Kotlin DSL Setup](#gradle-kotlin-dsl-setup)
 * [Gradle Groovy Setup](#gradle-groovy-setup)
 * [Notice](#notice)
 * [License](#license)
 * [Contact](#contact)
 
+---
+
 ## Introduction
 
 * On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library was deprecated in favor of
 the new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle)) method available in androidx.activity ``1.8.0-alpha03`` and later.
 
-* As of writing this documentation (September 14th, 2023), the new method only supports enabling Edge-To-Edge
-functionallity and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
+* As of writing this documentation (July 28th, 2024), the new method only supports enabling Edge-To-Edge
+functionality and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
 for tweaking the color, behavior, and visibility. That's the main reason I've decided to create the **System UI Bars Tweaker** library.
 
-* This library provides all of the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library + Edge-To-Edge functionality out of the box.
+* This library provides all the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library + Edge-To-Edge functionality out of the box.
+
+---
 
 ## Usage
 
+#### [Demo App APK](./app/release/app-release.apk)
+
+<p align="center-start">
+  <img src="./docs/articles_example.gif" alt="Articles Example GIF" style="display:inline-block; margin-right: 16px; height: 560px">
+  <img src="./docs/photos_example.gif" alt="Photos Example GIF" style="display:inline-block; height: 560px">
+</p>
+
 ### It's important to note a few things
 
-* The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer and Consumer. Think of it as a parent providing support to their children.
+* The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer and Consumer, which integrates really well with Compose.
 
 * Edge-To-Edge, transparent status & navigation bars (without a scrim for API >= 26) are enabled by default.
 
-* It's recomended to use a single top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt) instance per activity/dialog [Window](https://developer.android.com/reference/android/view/Window) and consume it down the composition.
+* It's recommended to use a single top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt) instance per activity/dialog [Window](https://developer.android.com/reference/android/view/Window) and consume it down the composition.
 
 * Here is an example by wrapping a Material3 app theme inside a [ProvideSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt) composable (a Producer) and declaring a tweaker variable by using the [LocalSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt) key (a Consumer). You can declare more than one variable anywhere down the composition, as long as there is a Producer to provide the top-level instance.
 
@@ -42,10 +53,10 @@ for tweaking the color, behavior, and visibility. That's the main reason I've de
 @Composable
 fun ApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    ...
+    // ...
 ) {
 
-    ...
+    // ...
 
     ProvideSystemUIBarsTweaker {
 
@@ -94,13 +105,7 @@ fun ApplicationTheme(
 val tweaker = rememberSystemUIBarsTweaker()
 ```
 
-## Requirements
-
-* Project minSdk version - `23`
-* Project compileSdk version - `34`
-* Jetpack Compose version - `1.5.1`
-* Jetpack Compose Compiler version - `1.5.3`
-* Kotlin version - `1.9.10`
+---
 
 ## Gradle Kotlin DSL Setup
 

@@ -6,8 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog
-import com.stoyanvuchev.systemuibarstweaker.demo.presentation.docs.DocsScreenDestinations
-import com.stoyanvuchev.systemuibarstweaker.demo.presentation.docs.docsNavigationGraph
+import com.stoyanvuchev.systemuibarstweaker.demo.presentation.examples.ExamplesScreenDestinations
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.examples.examplesNavigationGraph
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.settings.settingsNavigationGraph
 
@@ -26,13 +25,8 @@ fun AppNavigationHost(
 ) = NavHost(
     modifier = modifier.fillMaxSize(),
     navController = navHostController,
-    startDestination = DocsScreenDestinations.navigationGraphRoute,
+    startDestination = ExamplesScreenDestinations.navigationGraphRoute,
     builder = {
-
-        docsNavigationGraph(
-            navHostController = navHostController,
-            onDialogInvocation = onDialogInvocation
-        )
 
         examplesNavigationGraph(
             navHostController = navHostController,
