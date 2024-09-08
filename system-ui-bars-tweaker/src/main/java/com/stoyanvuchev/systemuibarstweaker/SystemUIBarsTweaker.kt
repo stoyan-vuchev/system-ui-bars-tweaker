@@ -18,6 +18,7 @@ package com.stoyanvuchev.systemuibarstweaker
 
 import android.app.Activity
 import android.os.Build
+import android.provider.Settings
 import android.view.View
 import android.view.Window
 import androidx.compose.runtime.Composable
@@ -118,6 +119,11 @@ interface SystemUIBarsTweaker {
     val systemUIBarsConfiguration: SystemUIBarsConfiguration
 
     /**
+     * Returns true when the Gesture Navigation mode is enabled, false otherwise.
+     **/
+    val isGestureNavigationEnabled: Boolean
+
+    /**
      * Functionality that allows the UI to be drawn under the system bars (a.k.a. Edge-To-Edge).
      *
      * @param enabled whether to enable or disable Edge-To-Edge.
@@ -191,6 +197,7 @@ interface SystemUIBarsTweaker {
  * @param initialConfiguration the initial configuration.
  * @param window a reference to the [View]'s window on which to apply the tweaks to.
  **/
+@Suppress("Deprecation")
 internal class SystemUIBarsTweakerImpl(
     view: View,
     private val initialConfiguration: SystemUIBarsConfiguration,
@@ -229,6 +236,19 @@ internal class SystemUIBarsTweakerImpl(
         private set
 
     override var systemUIBarsConfiguration = initialConfiguration
+
+    // Attempt to retrieve whether the Gesture Navigation mode is enabled.
+    override val isGestureNavigationEnabled: Boolean = window?.run {
+        try {
+            Settings.Secure.getInt(
+                window.context.contentResolver,
+                "navigation_mode"
+            ) == 2 // 2 means gesture navigation, 1 means button navigation
+        } catch (e: Settings.SettingNotFoundException) {
+            e.printStackTrace()
+            false // If setting is not found, default to false
+        }
+    } ?: false
 
     // Attempt to enable or disable Edge-To-Edge if the [window] is not null.
     override fun enableEdgeToEdge(enabled: Boolean) {
@@ -289,7 +309,8 @@ internal class SystemUIBarsTweakerImpl(
                 // Attempt to apply the Navigation Bar's color & scrim.
                 window?.run {
                     this.navigationBarColor = navigationBarStyle.color.toArgb()
-                    this.isNavigationBarContrastEnforced = navigationBarStyle.enforceContrast
+                    this.isNavigationBarContrastEnforced =
+                        !isGestureNavigationEnabled && navigationBarStyle.enforceContrast
                 }
 
                 // Attempt to apply the Navigation Bar's dark icons.
@@ -385,9 +406,9 @@ internal class SystemUIBarsTweakerImpl(
 internal val applyBlackScrim = applyScrim(scrim = Color.Black.copy(alpha = .33f))
 
 /**
- * Applies a White scrim with opacity of 80% on top of a [Color].
+ * Applies a White scrim with opacity of 67% on top of a [Color].
  **/
-internal val applyWhiteScrim = applyScrim(scrim = Color.White.copy(alpha = .8f))
+internal val applyWhiteScrim = applyScrim(scrim = Color.White.copy(alpha = .67f))
 
 /**
  * Applies a scrim on top of a given [Color].

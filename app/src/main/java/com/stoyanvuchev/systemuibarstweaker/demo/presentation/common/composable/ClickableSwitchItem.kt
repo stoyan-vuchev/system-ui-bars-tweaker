@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
  * @param label the label of the switch.
  * @param description an optional description of the switch.
  * @param checked the state indicating whether the switch is checked/unchecked.
+ * @param enabled the state indicating whether the switch is enabled/disabled.
  * @param paddingValues an optional padding values.
  * @param onCheckedChange the callback invoked after the switch is checked/unchecked.
  **/
@@ -37,6 +38,7 @@ fun ClickableSwitchItem(
     label: String,
     description: String? = null,
     checked: Boolean,
+    enabled: Boolean = true,
     paddingValues: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 8.dp),
     onCheckedChange: ((Boolean) -> Unit)?
 ) {
@@ -48,6 +50,7 @@ fun ClickableSwitchItem(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple(),
+                enabled = enabled,
                 onClick = { onCheckedChange!!(!checked) },
                 role = Role.Switch
             )
@@ -84,7 +87,8 @@ fun ClickableSwitchItem(
 
         Switch(
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
+            enabled = enabled
         )
 
     }

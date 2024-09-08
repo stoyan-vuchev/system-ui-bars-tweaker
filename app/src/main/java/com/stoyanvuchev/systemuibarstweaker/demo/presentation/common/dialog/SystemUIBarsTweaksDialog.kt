@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.isUnspecified
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.stoyanvuchev.systemuibarstweaker.LocalSystemUIBarsTweaker
 import com.stoyanvuchev.systemuibarstweaker.SystemUIBarsConfiguration
 import com.stoyanvuchev.systemuibarstweaker.demo.R
 import com.stoyanvuchev.systemuibarstweaker.demo.data.preferences.AppPreferencesImpl.Companion.DEFAULT
@@ -140,10 +141,13 @@ fun SystemUIBarsTweaksDialog(
 
                 HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
+                val isGestureMode = LocalSystemUIBarsTweaker.current.isGestureNavigationEnabled
+
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label),
                     description = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description),
-                    checked = navigationBarContrast,
+                    checked = !isGestureMode && navigationBarContrast,
+                    enabled = !isGestureMode,
                     onCheckedChange = {
                         navigationBarContrast = !navigationBarContrast
                     }
