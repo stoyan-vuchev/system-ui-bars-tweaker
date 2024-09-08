@@ -22,7 +22,7 @@
 * On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library was deprecated in favor of
 the new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle)) method available in androidx.activity ``1.8.0-alpha03`` and later.
 
-* As of writing this documentation (July 28th, 2024), the new method only supports enabling Edge-To-Edge
+* As of writing this documentation (September 8th, 2024), the new method only supports enabling Edge-To-Edge
 functionality and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
 for tweaking the color, behavior, and visibility. That's the main reason I've decided to create the **System UI Bars Tweaker** library.
 
