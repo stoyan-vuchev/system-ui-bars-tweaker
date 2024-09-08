@@ -1,9 +1,12 @@
 package com.stoyanvuchev.systemuibarstweaker.demo.presentation.settings
 
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.stoyanvuchev.systemuibarstweaker.LocalSystemUIBarsTweaker
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog
 
 /**
@@ -24,9 +27,20 @@ fun NavGraphBuilder.settingsNavigationGraph(
             route = SettingsScreenDestinations.Settings.route,
             content = {
 
+                val context = LocalContext.current
+                val tweaker = LocalSystemUIBarsTweaker.current
+
                 SettingsScreen(
                     onNavigateToScreen = { route ->
-                        navHostController.navigate(route) { launchSingleTop = true }
+                        if (route == "test_gesture") { // fixme
+                            val mode = if (tweaker.isGestureNavigationEnabled)
+                                "Navigation mode: Gesture" else "Navigation mode: Buttons"
+                            Toast.makeText(
+                                context,
+                                mode,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else navHostController.navigate(route) { launchSingleTop = true }
                     },
                     onDialogInvocation = onDialogInvocation
                 )

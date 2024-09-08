@@ -1,5 +1,6 @@
 package com.stoyanvuchev.systemuibarstweaker.demo.domain.model.settings
 
+import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BuildCircle
@@ -36,19 +37,35 @@ data class SettingsCategory(
         fun categoryList() = listOf(
             SettingsCategory(
                 label = R.string.settings_category_general_label,
-                items = listOf(
+                items = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                    listOf(
+                        SettingsItem(
+                            label = R.string.settings_category_general_theme_item_label,
+                            description = LocalThemeMode.current.description,
+                            icon = if (isSystemInDarkThemeMode()) Icons.Rounded.DarkMode
+                            else Icons.Rounded.LightMode,
+                            action = Pair(null, InvokedDialog.InvokedThemeDialog)
+                        ),
+                        SettingsItem(
+                            label = R.string.settings_category_general_color_scheme_item_label,
+                            description = LocalColorScheme.current.description,
+                            icon = Icons.Rounded.Palette,
+                            action = Pair(null, InvokedDialog.InvokedColorSchemeDialog)
+                        ),
+                        SettingsItem(
+                            label = R.string.settings_category_general_system_ui_bars_item_label,
+                            description = R.string.settings_category_general_system_ui_bars_item_description,
+                            icon = Icons.Rounded.BuildCircle,
+                            action = Pair(null, InvokedDialog.InvokedSystemUIBarsTweaksDialog)
+                        )
+                    )
+                else listOf(
                     SettingsItem(
                         label = R.string.settings_category_general_theme_item_label,
                         description = LocalThemeMode.current.description,
                         icon = if (isSystemInDarkThemeMode()) Icons.Rounded.DarkMode
                         else Icons.Rounded.LightMode,
                         action = Pair(null, InvokedDialog.InvokedThemeDialog)
-                    ),
-                    SettingsItem(
-                        label = R.string.settings_category_general_color_scheme_item_label,
-                        description = LocalColorScheme.current.description,
-                        icon = Icons.Rounded.Palette,
-                        action = Pair(null, InvokedDialog.InvokedColorSchemeDialog)
                     ),
                     SettingsItem(
                         label = R.string.settings_category_general_system_ui_bars_item_label,
@@ -65,7 +82,7 @@ data class SettingsCategory(
                         label = R.string.settings_category_other_about_item_label,
                         description = R.string.settings_category_other_about_item_description,
                         icon = Icons.Rounded.Info,
-                        action = Pair(null, null)
+                        action = Pair("test_gesture", null) // fixme
                     )
                 )
             )

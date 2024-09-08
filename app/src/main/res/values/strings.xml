@@ -29,7 +29,7 @@
     <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_label">Status Bar contrast</string>
     <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_description">Applies a slightly opaque scrim to the Status Bar.</string>
     <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label">Nav Bar contrast</string>
-    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description">Applies a slightly opaque scrim to the Nav Bar.</string>
+    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description">Applies a slightly opaque scrim to the Nav Bar. (Works only for Button Navigation.)</string>
 
     <!-- Theme Mode Dialog -->
     <string name="dialog_theme_mode_title">Theme</string>
