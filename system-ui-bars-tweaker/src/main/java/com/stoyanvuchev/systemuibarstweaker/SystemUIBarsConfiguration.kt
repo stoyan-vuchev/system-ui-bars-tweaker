@@ -87,8 +87,11 @@ class SystemUIBarsConfiguration(
                 enableEdgeToEdge = true,
                 statusBarStyle = SystemBarStyle().copy(scrimStyle = ScrimStyle.None),
                 navigationBarStyle = SystemBarStyle().copy(
-                    scrimStyle = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
-                        ScrimStyle.System else ScrimStyle.None
+                    scrimStyle = when {
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> ScrimStyle.None
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> ScrimStyle.Custom()
+                        else -> ScrimStyle.ObsoleteApiStyle
+                    }
                 ),
                 systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
             )
