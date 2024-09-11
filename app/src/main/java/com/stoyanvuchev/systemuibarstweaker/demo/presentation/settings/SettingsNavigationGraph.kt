@@ -33,8 +33,9 @@ fun NavGraphBuilder.settingsNavigationGraph(
                 SettingsScreen(
                     onNavigateToScreen = { route ->
                         if (route == "test_gesture") { // fixme
-                            val mode = if (tweaker.isGestureNavigationEnabled)
-                                "Navigation mode: Gesture" else "Navigation mode: Buttons"
+                            val mode = "Navigation mode: " +
+                                    (if (tweaker.isGestureNavigationEnabled) "Gesture"
+                                    else "Button") + " Navigation"
                             Toast.makeText(
                                 context,
                                 mode,

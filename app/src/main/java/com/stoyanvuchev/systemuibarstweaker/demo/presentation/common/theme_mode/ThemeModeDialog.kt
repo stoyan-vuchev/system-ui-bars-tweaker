@@ -78,72 +78,83 @@ fun ThemeModeDialog(
                     .clip(RoundedCornerShape(50))
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(shape = MaterialTheme.shapes.extraLarge)
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp)
+                    )
+            ) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                Spacer(modifier = Modifier.height(6.dp))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+
+                    RadioButtonItem(
+                        selected = newThemeMode == ThemeMode.System,
+                        label = stringResource(id = R.string.dialog_theme_mode_system_label),
+                        description = stringResource(id = R.string.dialog_theme_mode_system_description),
+                        onClick = { newThemeMode = ThemeMode.System }
+                    )
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(start = 24.dp, end = 24.dp)
+                    )
+
+                }
 
                 RadioButtonItem(
-                    selected = newThemeMode == ThemeMode.System,
-                    label = stringResource(id = R.string.dialog_theme_mode_system_label),
-                    description = stringResource(id = R.string.dialog_theme_mode_system_description),
-                    onClick = { newThemeMode = ThemeMode.System }
+                    selected = newThemeMode == ThemeMode.Light,
+                    label = stringResource(id = R.string.dialog_theme_mode_light_label),
+                    description = stringResource(id = R.string.dialog_theme_mode_light_description),
+                    onClick = { newThemeMode = ThemeMode.Light }
                 )
 
                 HorizontalDivider(
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp)
                 )
 
-            }
-
-            RadioButtonItem(
-                selected = newThemeMode == ThemeMode.Light,
-                label = stringResource(id = R.string.dialog_theme_mode_light_label),
-                description = stringResource(id = R.string.dialog_theme_mode_light_description),
-                onClick = { newThemeMode = ThemeMode.Light }
-            )
-
-            HorizontalDivider(
-                modifier = Modifier.padding(start = 24.dp, end = 24.dp)
-            )
-
-            RadioButtonItem(
-                selected = newThemeMode == ThemeMode.Dark,
-                label = stringResource(id = R.string.dialog_theme_mode_dark_label),
-                description = stringResource(id = R.string.dialog_theme_mode_dark_description),
-                onClick = { newThemeMode = ThemeMode.Dark }
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(horizontal = 0.dp)
-                    .clip(RoundedCornerShape(50))
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.End
-                ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                OutlinedButton(
-                    onClick = onDismissRequest,
-                    content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                RadioButtonItem(
+                    selected = newThemeMode == ThemeMode.Dark,
+                    label = stringResource(id = R.string.dialog_theme_mode_dark_label),
+                    description = stringResource(id = R.string.dialog_theme_mode_dark_description),
+                    onClick = { newThemeMode = ThemeMode.Dark }
                 )
 
-                Button(
-                    onClick = {
-                        onApplyRequest(newThemeMode)
-                        onDismissRequest()
-                    },
-                    content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(horizontal = 0.dp)
+                        .clip(RoundedCornerShape(50))
                 )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 20.dp,
+                        alignment = Alignment.End
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    OutlinedButton(
+                        onClick = onDismissRequest,
+                        content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                    )
+
+                    Button(
+                        onClick = {
+                            onApplyRequest(newThemeMode)
+                            onDismissRequest()
+                        },
+                        content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
+                    )
+
+                }
 
             }
 

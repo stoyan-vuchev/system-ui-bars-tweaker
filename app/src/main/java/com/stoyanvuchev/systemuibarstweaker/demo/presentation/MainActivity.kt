@@ -17,10 +17,12 @@ import androidx.navigation.compose.rememberNavController
 import com.stoyanvuchev.responsive_scaffold.ResponsiveScaffold
 import com.stoyanvuchev.systemuibarstweaker.demo.SystemUIBarsTweakerDemoApp.Companion.appModule
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.color_scheme.ColorSchemeDialog
+import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog.InvokedColorSchemeDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog.InvokedSystemUIBarsTweaksDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog.InvokedThemeDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog.None
+import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.SystemUIBarsScrimDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.SystemUIBarsTweaksDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.etc.LocalPaddingValues
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.theme_mode.ThemeModeDialog
@@ -97,7 +99,28 @@ class MainActivity : ComponentActivity() {
 
                         is InvokedSystemUIBarsTweaksDialog -> SystemUIBarsTweaksDialog(
                             systemUIBarsConfiguration = systemUIBarsConfiguration,
-                            onDismissRequest = remember { { viewModel.onDialogInvocation(None) } },
+                            onDismissRequest = remember {
+                                {
+                                    viewModel.onDialogInvocation(None)
+                                }
+                            },
+                            onShowScrimStyleDialog = remember {
+                                {
+                                    viewModel.onDialogInvocation(
+                                        InvokedDialog.InvokedSystemUIBarsScrimDialog
+                                    )
+                                }
+                            },
+                            onApplyRequest = viewModel::onApplyNewSystemUIBarsConfiguration
+                        )
+
+                        is InvokedDialog.InvokedSystemUIBarsScrimDialog -> SystemUIBarsScrimDialog(
+                            systemUIBarsConfiguration = systemUIBarsConfiguration,
+                            onDismissRequest = remember {
+                                {
+                                    viewModel.onDialogInvocation(InvokedSystemUIBarsTweaksDialog)
+                                }
+                            },
                             onApplyRequest = viewModel::onApplyNewSystemUIBarsConfiguration
                         )
 

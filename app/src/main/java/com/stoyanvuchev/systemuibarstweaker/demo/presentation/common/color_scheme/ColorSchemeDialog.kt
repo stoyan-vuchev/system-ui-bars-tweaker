@@ -4,12 +4,15 @@ import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -78,68 +81,77 @@ fun ColorSchemeDialog(
                     .clip(RoundedCornerShape(50))
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Column(
+                modifier = Modifier
+                    .height(IntrinsicSize.Max)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+            ) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Spacer(modifier = Modifier.height(6.dp))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+
+                    RadioButtonItem(
+                        selected = newColorScheme == ColorScheme.Dynamic,
+                        label = stringResource(id = R.string.dialog_color_scheme_dynamic_label),
+                        description = stringResource(id = R.string.dialog_color_scheme_dynamic_description),
+                        onClick = { newColorScheme = ColorScheme.Dynamic }
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
+
+                }
 
                 RadioButtonItem(
-                    selected = newColorScheme == ColorScheme.Dynamic,
-                    label = stringResource(id = R.string.dialog_color_scheme_dynamic_label),
-                    description = stringResource(id = R.string.dialog_color_scheme_dynamic_description),
-                    onClick = { newColorScheme = ColorScheme.Dynamic }
+                    selected = newColorScheme == ColorScheme.Default,
+                    label = stringResource(id = R.string.dialog_color_scheme_default_label),
+                    description = stringResource(id = R.string.dialog_color_scheme_default_description),
+                    onClick = { newColorScheme = ColorScheme.Default }
                 )
 
                 HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
-            }
-
-            RadioButtonItem(
-                selected = newColorScheme == ColorScheme.Default,
-                label = stringResource(id = R.string.dialog_color_scheme_default_label),
-                description = stringResource(id = R.string.dialog_color_scheme_default_description),
-                onClick = { newColorScheme = ColorScheme.Default }
-            )
-
-            HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
-
-            RadioButtonItem(
-                selected = newColorScheme == ColorScheme.Lavender,
-                label = stringResource(id = R.string.dialog_color_scheme_lavender_label),
-                description = stringResource(id = R.string.dialog_color_scheme_lavender_description),
-                onClick = { newColorScheme = ColorScheme.Lavender }
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(horizontal = 0.dp)
-                    .clip(RoundedCornerShape(50))
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.End
-                ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                OutlinedButton(
-                    onClick = onDismissRequest,
-                    content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                RadioButtonItem(
+                    selected = newColorScheme == ColorScheme.Lavender,
+                    label = stringResource(id = R.string.dialog_color_scheme_lavender_label),
+                    description = stringResource(id = R.string.dialog_color_scheme_lavender_description),
+                    onClick = { newColorScheme = ColorScheme.Lavender }
                 )
 
-                Button(
-                    onClick = {
-                        onApplyRequest(newColorScheme)
-                        onDismissRequest()
-                    },
-                    content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(horizontal = 0.dp)
+                        .clip(RoundedCornerShape(50))
                 )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 20.dp,
+                        alignment = Alignment.End
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    OutlinedButton(
+                        onClick = onDismissRequest,
+                        content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                    )
+
+                    Button(
+                        onClick = {
+                            onApplyRequest(newColorScheme)
+                            onDismissRequest()
+                        },
+                        content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
+                    )
+
+                }
 
             }
 
