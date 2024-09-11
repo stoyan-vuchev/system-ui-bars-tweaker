@@ -3,7 +3,6 @@ package com.stoyanvuchev.systemuibarstweaker.demo.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stoyanvuchev.systemuibarstweaker.SystemUIBarsConfiguration
-import com.stoyanvuchev.systemuibarstweaker.demo.data.preferences.AppPreferencesImpl.Companion.DEFAULT
 import com.stoyanvuchev.systemuibarstweaker.demo.domain.preferences.AppPreferences
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.color_scheme.ColorScheme
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog.InvokedDialog

@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.com.android.application)
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.plugin.compose)
 }
@@ -65,6 +66,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.material)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
 
     // Compose
     implementation(libs.activity.compose)

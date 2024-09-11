@@ -12,7 +12,6 @@ import assertk.assertions.isFalse
 import assertk.assertions.isTrue
 import com.stoyanvuchev.systemuibarstweaker.utils.WindowUtils
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.runTest
@@ -23,7 +22,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.coroutines.CoroutineContext
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class SystemUIBarsTweakerImplTest {
 

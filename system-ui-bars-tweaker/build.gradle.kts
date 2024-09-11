@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.com.android.library)
+    alias(libs.plugins.org.jetbrains.kotlinx.serialization)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.plugin.compose)
     `maven-publish`
@@ -46,7 +47,7 @@ afterEvaluate {
 
                 groupId = "com.github.stoyan-vuchev"
                 artifactId = "system-ui-bars-tweaker"
-                version = "1.1.0"
+                version = "1.2.0"
 
                 afterEvaluate {
                     from(components["release"])
@@ -63,6 +64,8 @@ dependencies {
 
     implementation(libs.core.ktx)
     implementation(libs.activity.compose)
+    implementation(libs.google.gson)
+    implementation(libs.kotlinx.serialization.json)
 
     // Compose
 

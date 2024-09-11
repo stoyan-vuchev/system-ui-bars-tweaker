@@ -16,9 +16,11 @@
 
 package com.stoyanvuchev.systemuibarstweaker
 
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.core.view.WindowInsetsControllerCompat
+import kotlinx.serialization.Serializable
 
 /**
  * A class containing a variety of configurations for a [SystemUIBarsTweaker].
@@ -34,6 +36,7 @@ import androidx.core.view.WindowInsetsControllerCompat
  * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
  * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
  **/
+@Serializable
 @Stable
 class SystemUIBarsConfiguration(
     val isStatusBarVisible: Boolean,
@@ -76,6 +79,19 @@ class SystemUIBarsConfiguration(
             navigationBarStyle = navigationBarStyle,
             systemBarsBehavior = systemBarsBehavior
         )
+
+        val DEFAULT
+            get() = SystemUIBarsConfiguration(
+                isStatusBarVisible = true,
+                isNavigationBarVisible = true,
+                enableEdgeToEdge = true,
+                statusBarStyle = SystemBarStyle().copy(scrimStyle = ScrimStyle.None),
+                navigationBarStyle = SystemBarStyle().copy(
+                    scrimStyle = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+                        ScrimStyle.System else ScrimStyle.None
+                ),
+                systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
+            )
 
     }
 
