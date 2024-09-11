@@ -259,6 +259,32 @@ internal class SystemUIBarsTweakerImpl(
 
     // Attempt to apply Status Bar style.
     override fun tweakStatusBarStyle(statusBarStyle: SystemBarStyle) {
+
+        val scrimStyle = statusBarStyle.scrimStyle
+        val statusBarColor = when (scrimStyle) {
+
+            is ScrimStyle.None -> statusBarStyle.color
+
+            is ScrimStyle.System -> {
+
+                // Android 10 (API 29) or newer handles the System scrim.
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) Color.Unspecified
+                else (if (statusBarStyle.darkIcons) applyWhiteScrim(statusBarStyle.color)
+                else applyBlackScrim(statusBarStyle.color))
+
+            }
+
+            is ScrimStyle.Custom -> {
+
+                (if (statusBarStyle.darkIcons) {
+                    scrimStyle.lightThemeColor.copy(alpha = scrimStyle.lightThemeColorOpacity)
+                } else scrimStyle.darkThemeColor.copy(alpha = scrimStyle.darkThemeColorOpacity))
+
+            }
+
+        }.toArgb()
+
         when {
 
             // Android 10 (API 29) or newer.
@@ -266,8 +292,8 @@ internal class SystemUIBarsTweakerImpl(
 
                 // Attempt to apply the Status Bar's color & scrim.
                 window?.run {
-                    this.statusBarColor = statusBarStyle.color.toArgb()
-                    this.isStatusBarContrastEnforced = statusBarStyle.enforceContrast
+                    this.statusBarColor = statusBarColor
+                    this.isStatusBarContrastEnforced = scrimStyle == ScrimStyle.System
                 }
 
                 // Attempt to apply the Status Bar's dark icons.
@@ -282,11 +308,7 @@ internal class SystemUIBarsTweakerImpl(
 
                 // Attempt to apply the Status Bar's color.
                 window?.run {
-                    val color = statusBarStyle.color
-                    this.statusBarColor = if (statusBarStyle.enforceContrast) {
-                        (if (statusBarStyle.darkIcons) applyWhiteScrim(color)
-                        else applyBlackScrim(color)).toArgb()
-                    } else color.toArgb()
+                    this.statusBarColor = statusBarColor
                 }
 
                 // Attempt to apply the Status Bar's dark icons.
@@ -301,6 +323,34 @@ internal class SystemUIBarsTweakerImpl(
 
     // Attempt to apply Navigation Bar style.
     override fun tweakNavigationBarStyle(navigationBarStyle: SystemBarStyle) {
+
+        val scrimStyle = navigationBarStyle.scrimStyle
+        val navigationBarColor = when (scrimStyle) {
+
+            is ScrimStyle.None -> navigationBarStyle.color
+
+            is ScrimStyle.System -> {
+
+                // Android 10 (API 29) or newer handles the System scrim.
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) Color.Transparent
+                else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                    applyBlackScrim(navigationBarStyle.color)
+                } else (if (statusBarStyle.darkIcons) applyWhiteScrim(navigationBarStyle.color)
+                else applyBlackScrim(navigationBarStyle.color))
+
+            }
+
+            is ScrimStyle.Custom -> {
+
+                (if (statusBarStyle.darkIcons) {
+                    scrimStyle.lightThemeColor.copy(alpha = scrimStyle.lightThemeColorOpacity)
+                } else scrimStyle.darkThemeColor.copy(alpha = scrimStyle.darkThemeColorOpacity))
+
+            }
+
+        }.toArgb()
+
         when {
 
             // Android 10 (API 29) or newer.
@@ -308,9 +358,9 @@ internal class SystemUIBarsTweakerImpl(
 
                 // Attempt to apply the Navigation Bar's color & scrim.
                 window?.run {
-                    this.navigationBarColor = navigationBarStyle.color.toArgb()
+                    this.navigationBarColor = navigationBarColor
                     this.isNavigationBarContrastEnforced =
-                        !isGestureNavigationEnabled && navigationBarStyle.enforceContrast
+                        !isGestureNavigationEnabled && scrimStyle == ScrimStyle.System
                 }
 
                 // Attempt to apply the Navigation Bar's dark icons.
@@ -325,11 +375,7 @@ internal class SystemUIBarsTweakerImpl(
 
                 // Attempt to apply the Navigation Bar's color.
                 window?.run {
-                    val color = navigationBarStyle.color
-                    this.navigationBarColor = if (navigationBarStyle.enforceContrast) {
-                        (if (navigationBarStyle.darkIcons) applyWhiteScrim(color)
-                        else applyBlackScrim(color)).toArgb()
-                    } else color.toArgb()
+                    this.navigationBarColor = navigationBarColor
                 }
 
                 // Attempt to apply the Navigation Bar's dark icons.
@@ -344,9 +390,7 @@ internal class SystemUIBarsTweakerImpl(
 
                 // Attempt to apply the Navigation Bar's color.
                 window?.run {
-                    val color = navigationBarStyle.color
-                    this.navigationBarColor = (if (navigationBarStyle.enforceContrast)
-                        applyBlackScrim(color) else color).toArgb()
+                    this.navigationBarColor = navigationBarColor
                 }
 
             }
