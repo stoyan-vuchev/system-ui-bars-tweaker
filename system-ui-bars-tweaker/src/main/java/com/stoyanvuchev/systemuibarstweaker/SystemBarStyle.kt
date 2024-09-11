@@ -81,7 +81,11 @@ class SystemBarStyle(
         fun defaultNavigationBarStyle(
             color: Color = Color.Unspecified,
             darkIcons: Boolean = !isSystemInDarkTheme(),
-            scrimStyle: ScrimStyle = ScrimStyle.System
+            scrimStyle: ScrimStyle = when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> ScrimStyle.None
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> ScrimStyle.Custom()
+                else -> ScrimStyle.ObsoleteApiStyle
+            }
         ) = SystemBarStyle(
             color = color,
             darkIcons = darkIcons,
@@ -199,7 +203,11 @@ fun SystemBarStyle.Companion.defaultNavigationBarStyle(
 ) = SystemBarStyle(
     color = color,
     darkIcons = darkIcons,
-    scrimStyle = if (enforceContrast) ScrimStyle.System else ScrimStyle.None
+    scrimStyle = if (enforceContrast) when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> ScrimStyle.System
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> ScrimStyle.Custom()
+        else -> ScrimStyle.ObsoleteApiStyle
+    } else ScrimStyle.None
 )
 
 /**

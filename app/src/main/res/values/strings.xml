@@ -26,10 +26,19 @@
     <string name="dialog_system_ui_bars_tweaks_translucent_status_bar_item_description">Makes the Status Bar fully transparent.</string>
     <string name="dialog_system_ui_bars_tweaks_translucent_nav_bar_item_label">Translucent Nav Bar</string>
     <string name="dialog_system_ui_bars_tweaks_translucent_nav_bar_item_description">Makes the Nav Bar fully transparent.</string>
-    <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_label">Status Bar contrast</string>
-    <string name="dialog_system_ui_bars_tweaks_status_bar_contrast_item_description">Applies a slightly opaque scrim to the Status Bar.</string>
-    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label">Nav Bar contrast</string>
-    <string name="dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description">Applies a slightly opaque scrim to the Nav Bar. (Works only for Button Navigation.)</string>
+    <string name="dialog_system_ui_bars_tweaks_scrim_item_label">Scrim Style</string>
+    <string name="dialog_system_ui_bars_tweaks_scrim_item_description">Applies a slightly opaque Scrim Style to the System UI Bars.</string>
+
+    <!-- System UI Bars Scrim Dialog -->
+    <string name="dialog_system_ui_bars_scrim_title">Scrim Style</string>
+    <string name="dialog_system_ui_bars_scrim_status_bar_subtitle">Status Bar Scrim</string>
+    <string name="dialog_system_ui_bars_scrim_navigation_bar_subtitle">Navigation Bar Scrim</string>
+    <string name="dialog_system_ui_bars_scrim_none_label">None</string>
+    <string name="dialog_system_ui_bars_scrim_none_description">Scrim style is not applied.</string>
+    <string name="dialog_system_ui_bars_scrim_system_label">System</string>
+    <string name="dialog_system_ui_bars_scrim_system_description">Applies the System scrim style.</string>
+    <string name="dialog_system_ui_bars_scrim_custom_label">Custom</string>
+    <string name="dialog_system_ui_bars_scrim_custom_description">Applies a Custom scrim style.</string>
 
     <!-- Theme Mode Dialog -->
     <string name="dialog_theme_mode_title">Theme</string>

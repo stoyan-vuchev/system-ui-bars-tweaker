@@ -1,7 +1,5 @@
 package com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.dialog
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Immutable
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.color_scheme.ColorSchemeDialog
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.theme_mode.ThemeModeDialog
@@ -20,7 +18,6 @@ sealed interface InvokedDialog {
     /**
      * A dialog type indicating invocation of a [ColorSchemeDialog].
      **/
-    @RequiresApi(Build.VERSION_CODES.S)
     data object InvokedColorSchemeDialog : InvokedDialog
 
     /**
@@ -32,5 +29,10 @@ sealed interface InvokedDialog {
      * A dialog type indicating invocation of a [SystemUIBarsTweaksDialog].
      **/
     data object InvokedSystemUIBarsTweaksDialog : InvokedDialog
+
+    /**
+     * A dialog type indicating invocation of a [SystemUIBarsScrimDialog].
+     **/
+    data object InvokedSystemUIBarsScrimDialog : InvokedDialog
 
 }

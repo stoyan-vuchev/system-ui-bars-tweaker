@@ -3,7 +3,8 @@
 [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
-> A Jetpack Compose library for Android with easy-to-use utilities to tweak the color, behavior, and visibility of the System UI bars.
+> A Jetpack Compose library for Android with easy-to-use utilities to tweak the color, behavior, and visibility of the
+> System UI bars.
 
 ## Table of Contents
 
@@ -19,14 +20,20 @@
 
 ## Introduction
 
-* On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library was deprecated in favor of
-the new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle)) method available in androidx.activity ``1.8.0-alpha03`` and later.
+* On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/)
+  library was deprecated in favor of
+  the
+  new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle))
+  method available in androidx.activity ``1.8.0-alpha03`` and later.
 
 * As of writing this documentation (September 8th, 2024), the new method only supports enabling Edge-To-Edge
-functionality and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
-for tweaking the color, behavior, and visibility. That's the main reason I've decided to create the **System UI Bars Tweaker** library.
+  functionality and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
+  for tweaking the color, behavior, and visibility. That's the main reason I've decided to create the **System UI Bars
+  Tweaker** library.
 
-* This library provides all the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library + Edge-To-Edge functionality out of the box.
+* This library provides all
+  the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library +
+  Edge-To-Edge functionality out of the box.
 
 ---
 
@@ -41,13 +48,22 @@ for tweaking the color, behavior, and visibility. That's the main reason I've de
 
 ### It's important to note a few things
 
-* The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer and Consumer, which integrates really well with Compose.
+* The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer
+  and Consumer, which integrates really well with Compose.
 
 * Edge-To-Edge, transparent status & navigation bars (without a scrim for API >= 26) are enabled by default.
 
-* It's recommended to use a single top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt) instance per activity/dialog [Window](https://developer.android.com/reference/android/view/Window) and consume it down the composition.
+* It's recommended to use a single
+  top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt)
+  instance per activity/dialog [Window](https://developer.android.com/reference/android/view/Window) and consume it down
+  the composition.
 
-* Here is an example by wrapping a Material3 app theme inside a [ProvideSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt) composable (a Producer) and declaring a tweaker variable by using the [LocalSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt) key (a Consumer). You can declare more than one variable anywhere down the composition, as long as there is a Producer to provide the top-level instance.
+* Here is an example by wrapping a Material3 app theme inside
+  a [ProvideSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt)
+  composable (a Producer) and declaring a tweaker variable by using
+  the [LocalSystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/LocalSystemUIBarsTweaker.kt)
+  key (a Consumer). You can declare more than one variable anywhere down the composition, as long as there is a Producer
+  to provide the top-level instance.
 
 ``` kotlin
 @Composable
@@ -66,18 +82,19 @@ fun ApplicationTheme(
 
             // Update all of the system bar colors to be transparent,
             // use dark icons if we're in light theme,
-            // and disable the scrim (enforced contrast).
+            // and apply scrim to the navigation bar (only for button navigation mode).
 
             tweaker.tweakSystemBarsStyle(
                 statusBarStyle = SystemBarStyle(
                     color = Color.Transparent,
                     darkIcons = !darkTheme,
-                    enforceContrast = false
+                    scrimStyle = ScrimStyle.None
                 ),
                 navigationBarStyle = SystemBarStyle(
                     color = Color.Transparent,
                     darkIcons = !darkTheme,
-                    enforceContrast = false
+                    scrimStyle = if (!tweaker.isGestureNavigationEnabled) ScrimStyle.System 
+                    else ScrimStyle.None
                 )
             )
 
@@ -99,7 +116,8 @@ fun ApplicationTheme(
 }
 ```
 
-* If you don't want to use the Producer and Consumer approach, you can simply create an instance using a `rememberSystemUIBarsTweaker()` composable.
+* If you don't want to use the Producer and Consumer approach, you can simply create an instance using
+  a `rememberSystemUIBarsTweaker()` composable.
 
 ``` kotlin
 val tweaker = rememberSystemUIBarsTweaker()
@@ -111,7 +129,8 @@ val tweaker = rememberSystemUIBarsTweaker()
 
 #### Step 1
 
-* Add the Jitpack maven repository inside the `dependencyResolutionManagement` block of the  `settings.gradle` file if you don't have it already.
+* Add the Jitpack maven repository inside the `dependencyResolutionManagement` block of the  `settings.gradle` file if
+  you don't have it already.
 
 ```kotlin
 dependencyResolutionManagement {
@@ -127,7 +146,8 @@ dependencyResolutionManagement {
 #### Step 2
 
 * Add the dependency in your module `build.gradle.kts` file.
-* Latest version: [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
+* Latest
+  version: [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
 
 ```kotlin
 implementation("com.github.stoyan-vuchev:system-ui-bars-tweaker:<version>")
@@ -159,7 +179,8 @@ implementation(libs.systemUIBarsTweaker)
 
 #### Step 1
 
-* Add the Jitpack maven repository inside the `dependencyResolutionManagement` block of the  `settings.gradle` file if you don't have it already.
+* Add the Jitpack maven repository inside the `dependencyResolutionManagement` block of the  `settings.gradle` file if
+  you don't have it already.
 
 ```groovy
 dependencyResolutionManagement {
@@ -175,7 +196,8 @@ dependencyResolutionManagement {
 #### Step 2
 
 * Add the dependency in your module `build.gradle` file.
-* Latest version: [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
+* Latest
+  version: [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
 
 ```groovy
 implementation 'com.github.stoyan-vuchev:system-ui-bars-tweaker:<version>'
@@ -200,7 +222,8 @@ For more information, please refer to the [NOTICE](./NOTICE) file.
 
 Attributions:
 
-* The Android Open Source Project: <https://github.com/stoyan-vuchev/accompanist/blob/compose-1.5/systemuicontroller/src/main/java/com/google/accompanist/systemuicontroller/SystemUiController.kt>
+* The Android Open Source
+  Project: <https://github.com/stoyan-vuchev/accompanist/blob/compose-1.5/systemuicontroller/src/main/java/com/google/accompanist/systemuicontroller/SystemUiController.kt>
 
 ## License
 

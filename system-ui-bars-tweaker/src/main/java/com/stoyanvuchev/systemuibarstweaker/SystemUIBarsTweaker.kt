@@ -265,22 +265,25 @@ internal class SystemUIBarsTweakerImpl(
 
             is ScrimStyle.None -> statusBarStyle.color
 
-            is ScrimStyle.System -> {
+            is ScrimStyle.System -> when {
 
                 // Android 10 (API 29) or newer handles the System scrim.
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> Color.Unspecified
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) Color.Unspecified
-                else (if (statusBarStyle.darkIcons) applyWhiteScrim(statusBarStyle.color)
-                else applyBlackScrim(statusBarStyle.color))
+                else -> if (statusBarStyle.darkIcons) {
+                    applyWhiteScrim(statusBarStyle.color)
+                } else {
+                    applyBlackScrim(statusBarStyle.color)
+                }
 
             }
 
-            is ScrimStyle.Custom -> {
-
-                (if (statusBarStyle.darkIcons) {
-                    scrimStyle.lightThemeColor.copy(alpha = scrimStyle.lightThemeColorOpacity)
-                } else scrimStyle.darkThemeColor.copy(alpha = scrimStyle.darkThemeColorOpacity))
-
+            is ScrimStyle.Custom -> if (statusBarStyle.darkIcons) {
+                scrimStyle.lightThemeColor
+                    .copy(alpha = scrimStyle.lightThemeColorOpacity)
+            } else {
+                scrimStyle.darkThemeColor
+                    .copy(alpha = scrimStyle.darkThemeColorOpacity)
             }
 
         }.toArgb()
@@ -329,24 +332,27 @@ internal class SystemUIBarsTweakerImpl(
 
             is ScrimStyle.None -> navigationBarStyle.color
 
-            is ScrimStyle.System -> {
+            is ScrimStyle.System -> when {
 
                 // Android 10 (API 29) or newer handles the System scrim.
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> Color.Transparent
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) Color.Transparent
-                else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.O -> {
                     applyBlackScrim(navigationBarStyle.color)
-                } else (if (statusBarStyle.darkIcons) applyWhiteScrim(navigationBarStyle.color)
-                else applyBlackScrim(navigationBarStyle.color))
+                }
+
+                else -> if (navigationBarStyle.darkIcons) {
+                    applyWhiteScrim(navigationBarStyle.color)
+                } else {
+                    applyBlackScrim(navigationBarStyle.color)
+                }
 
             }
 
-            is ScrimStyle.Custom -> {
-
-                (if (statusBarStyle.darkIcons) {
-                    scrimStyle.lightThemeColor.copy(alpha = scrimStyle.lightThemeColorOpacity)
-                } else scrimStyle.darkThemeColor.copy(alpha = scrimStyle.darkThemeColorOpacity))
-
+            is ScrimStyle.Custom -> if (navigationBarStyle.darkIcons) {
+                scrimStyle.lightThemeColor.copy(alpha = scrimStyle.lightThemeColorOpacity)
+            } else {
+                scrimStyle.darkThemeColor.copy(alpha = scrimStyle.darkThemeColorOpacity)
             }
 
         }.toArgb()

@@ -31,10 +31,9 @@ import androidx.compose.ui.graphics.isUnspecified
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.stoyanvuchev.systemuibarstweaker.LocalSystemUIBarsTweaker
-import com.stoyanvuchev.systemuibarstweaker.ScrimStyle
 import com.stoyanvuchev.systemuibarstweaker.SystemUIBarsConfiguration
 import com.stoyanvuchev.systemuibarstweaker.demo.R
+import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.composable.ClickableCardItem
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.composable.ClickableSwitchItem
 
 /**
@@ -48,6 +47,7 @@ import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.composable.
 fun SystemUIBarsTweaksDialog(
     systemUIBarsConfiguration: SystemUIBarsConfiguration,
     onDismissRequest: () -> Unit,
+    onShowScrimStyleDialog: () -> Unit,
     onApplyRequest: (SystemUIBarsConfiguration) -> Unit
 ) {
 
@@ -57,14 +57,6 @@ fun SystemUIBarsTweaksDialog(
 
     var transparentNavigationBar by remember {
         mutableStateOf(systemUIBarsConfiguration.navigationBarStyle.color.isUnspecified)
-    }
-
-    var statusBarContrast by remember {
-        mutableStateOf(systemUIBarsConfiguration.statusBarStyle.scrimStyle)
-    }
-
-    var navigationBarContrast by remember {
-        mutableStateOf(systemUIBarsConfiguration.navigationBarStyle.scrimStyle)
     }
 
     Dialog(
@@ -130,77 +122,60 @@ fun SystemUIBarsTweaksDialog(
 
                 HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
 
-                ClickableSwitchItem(
-                    label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_status_bar_contrast_item_label),
-                    description = stringResource(id = R.string.dialog_system_ui_bars_tweaks_status_bar_contrast_item_description),
-                    checked = statusBarContrast != ScrimStyle.None,
-                    onCheckedChange = {
-                        statusBarContrast = if (statusBarContrast != ScrimStyle.None) ScrimStyle.None
-                        else ScrimStyle.Custom()
-                    }
-                )
-
-                HorizontalDivider(modifier = Modifier.padding(start = 24.dp, end = 24.dp))
-
-                val isGestureMode = LocalSystemUIBarsTweaker.current.isGestureNavigationEnabled
-
-                ClickableSwitchItem(
-                    label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label),
-                    description = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description),
-                    checked = !isGestureMode && navigationBarContrast != ScrimStyle.None,
-                    enabled = !isGestureMode,
-                    onCheckedChange = {
-                        navigationBarContrast = if (navigationBarContrast != ScrimStyle.None) ScrimStyle.None
-                        else ScrimStyle.Custom()
-                    }
+                ClickableCardItem(
+                    label = stringResource(
+                        id = R.string.dialog_system_ui_bars_tweaks_scrim_item_label
+                    ),
+                    description = stringResource(
+                        id = R.string.dialog_system_ui_bars_tweaks_scrim_item_description
+                    ),
+                    onClick = onShowScrimStyleDialog
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-            }
-
-            HorizontalDivider(
-                modifier = Modifier
-                    .padding(horizontal = 0.dp)
-                    .clip(RoundedCornerShape(50))
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 20.dp,
-                    alignment = Alignment.End
-                ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                OutlinedButton(
-                    onClick = onDismissRequest,
-                    content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(horizontal = 0.dp)
+                        .clip(RoundedCornerShape(50))
                 )
 
-                Button(
-                    onClick = {
-                        onApplyRequest(
-                            systemUIBarsConfiguration.copy(
-                                statusBarStyle = systemUIBarsConfiguration.statusBarStyle.copy(
-                                    color = if (!transparentStatusBar) Color.DarkGray
-                                    else SystemUIBarsConfiguration.DEFAULT.statusBarStyle.color,
-                                    scrimStyle = statusBarContrast
-                                ),
-                                navigationBarStyle = systemUIBarsConfiguration.navigationBarStyle.copy(
-                                    color = if (!transparentNavigationBar) Color.DarkGray
-                                    else SystemUIBarsConfiguration.DEFAULT.navigationBarStyle.color,
-                                    scrimStyle = navigationBarContrast
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 20.dp,
+                        alignment = Alignment.End
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    OutlinedButton(
+                        onClick = onDismissRequest,
+                        content = { Text(text = stringResource(id = R.string.dialog_action_cancel)) }
+                    )
+
+                    Button(
+                        onClick = {
+                            onApplyRequest(
+                                systemUIBarsConfiguration.copy(
+                                    statusBarStyle = systemUIBarsConfiguration.statusBarStyle.copy(
+                                        color = if (!transparentStatusBar) Color.DarkGray
+                                        else SystemUIBarsConfiguration.DEFAULT.statusBarStyle.color
+                                    ),
+                                    navigationBarStyle = systemUIBarsConfiguration.navigationBarStyle.copy(
+                                        color = if (!transparentNavigationBar) Color.DarkGray
+                                        else SystemUIBarsConfiguration.DEFAULT.navigationBarStyle.color
+                                    )
                                 )
                             )
-                        )
-                        onDismissRequest()
-                    },
-                    content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
-                )
+                            onDismissRequest()
+                        },
+                        content = { Text(text = stringResource(id = R.string.dialog_action_apply)) }
+                    )
+
+                }
 
             }
 

@@ -9,14 +9,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
@@ -31,7 +32,6 @@ import androidx.compose.ui.unit.dp
  * @param paddingValues an optional padding values.
  * @param onCheckedChange the callback invoked after the switch is checked/unchecked.
  **/
-@Suppress("DEPRECATION_ERROR")
 @Composable
 fun ClickableSwitchItem(
     modifier: Modifier = Modifier,
@@ -49,13 +49,14 @@ fun ClickableSwitchItem(
             .defaultMinSize(minHeight = 56.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple(),
+                indication = ripple(),
                 enabled = enabled,
                 onClick = { onCheckedChange!!(!checked) },
                 role = Role.Switch
             )
             .padding(paddingValues)
-            .then(modifier),
+            .then(modifier)
+            .graphicsLayer(alpha = if (enabled) 1f else .5f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
