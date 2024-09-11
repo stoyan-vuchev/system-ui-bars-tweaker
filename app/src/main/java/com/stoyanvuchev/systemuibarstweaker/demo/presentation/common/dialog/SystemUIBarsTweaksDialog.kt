@@ -32,9 +32,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.stoyanvuchev.systemuibarstweaker.LocalSystemUIBarsTweaker
+import com.stoyanvuchev.systemuibarstweaker.ScrimStyle
 import com.stoyanvuchev.systemuibarstweaker.SystemUIBarsConfiguration
 import com.stoyanvuchev.systemuibarstweaker.demo.R
-import com.stoyanvuchev.systemuibarstweaker.demo.data.preferences.AppPreferencesImpl.Companion.DEFAULT
 import com.stoyanvuchev.systemuibarstweaker.demo.presentation.common.composable.ClickableSwitchItem
 
 /**
@@ -60,11 +60,11 @@ fun SystemUIBarsTweaksDialog(
     }
 
     var statusBarContrast by remember {
-        mutableStateOf(systemUIBarsConfiguration.statusBarStyle.enforceContrast)
+        mutableStateOf(systemUIBarsConfiguration.statusBarStyle.scrimStyle)
     }
 
     var navigationBarContrast by remember {
-        mutableStateOf(systemUIBarsConfiguration.navigationBarStyle.enforceContrast)
+        mutableStateOf(systemUIBarsConfiguration.navigationBarStyle.scrimStyle)
     }
 
     Dialog(
@@ -133,9 +133,10 @@ fun SystemUIBarsTweaksDialog(
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_status_bar_contrast_item_label),
                     description = stringResource(id = R.string.dialog_system_ui_bars_tweaks_status_bar_contrast_item_description),
-                    checked = statusBarContrast,
+                    checked = statusBarContrast != ScrimStyle.None,
                     onCheckedChange = {
-                        statusBarContrast = !statusBarContrast
+                        statusBarContrast = if (statusBarContrast != ScrimStyle.None) ScrimStyle.None
+                        else ScrimStyle.Custom()
                     }
                 )
 
@@ -146,10 +147,11 @@ fun SystemUIBarsTweaksDialog(
                 ClickableSwitchItem(
                     label = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_label),
                     description = stringResource(id = R.string.dialog_system_ui_bars_tweaks_nav_bar_contrast_item_description),
-                    checked = !isGestureMode && navigationBarContrast,
+                    checked = !isGestureMode && navigationBarContrast != ScrimStyle.None,
                     enabled = !isGestureMode,
                     onCheckedChange = {
-                        navigationBarContrast = !navigationBarContrast
+                        navigationBarContrast = if (navigationBarContrast != ScrimStyle.None) ScrimStyle.None
+                        else ScrimStyle.Custom()
                     }
                 )
 
@@ -186,12 +188,12 @@ fun SystemUIBarsTweaksDialog(
                                 statusBarStyle = systemUIBarsConfiguration.statusBarStyle.copy(
                                     color = if (!transparentStatusBar) Color.DarkGray
                                     else SystemUIBarsConfiguration.DEFAULT.statusBarStyle.color,
-                                    enforceContrast = statusBarContrast
+                                    scrimStyle = statusBarContrast
                                 ),
                                 navigationBarStyle = systemUIBarsConfiguration.navigationBarStyle.copy(
                                     color = if (!transparentNavigationBar) Color.DarkGray
                                     else SystemUIBarsConfiguration.DEFAULT.navigationBarStyle.color,
-                                    enforceContrast = navigationBarContrast
+                                    scrimStyle = navigationBarContrast
                                 )
                             )
                         )
