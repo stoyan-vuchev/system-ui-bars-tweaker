@@ -51,7 +51,29 @@
 * The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer
   and Consumer, which integrates really well with Compose.
 
-* Edge-To-Edge, transparent status & navigation bars (without a scrim for API >= 26) are enabled by default.
+* Transparent status bar & navigation bar (without a scrim for gesture navigation) are enabled by default, however, to enable Edge-To-Edge, make sure to call the `enableEdgeToEdge()` function in the activity `onCreate()`.
+```kotlin
+// ...
+import androidx.activity.enableEdgeToEdge
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+      
+        // Enable Edge-To-Edge.
+        enableEdgeToEdge()
+      
+        setContent { 
+            // ...
+        }
+      
+    }
+
+}
+```
+
+* Currently, on API >= 35, scrim cannot be applied.
 
 * It's recommended to use a single
   top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt)
