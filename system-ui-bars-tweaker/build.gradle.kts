@@ -47,7 +47,7 @@ afterEvaluate {
 
                 groupId = "com.github.stoyan-vuchev"
                 artifactId = "system-ui-bars-tweaker"
-                version = "1.2.1"
+                version = "1.2.2"
 
                 afterEvaluate {
                     from(components["release"])
