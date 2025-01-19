@@ -21,19 +21,15 @@
 ## Introduction
 
 * On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/)
-  library was deprecated in favor of
-  the
-  new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle))
-  method available in androidx.activity ``1.8.0-alpha03`` and later.
+  library was deprecated in favor of the new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle)) 
+  method available in androidx.activity version ``1.8.0-alpha03`` and later.
 
-* As of writing this documentation (September 8th, 2024), the new method only supports enabling Edge-To-Edge
+* The new method only supports enabling Edge-To-Edge
   functionality and applying light/dark scrim to the System UI bars. Therefore, losing the easy-to-use utilities
   for tweaking the color, behavior, and visibility. That's the main reason I've decided to create the **System UI Bars
   Tweaker** library.
 
-* This library provides all
-  the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) library +
-  Edge-To-Edge functionality out of the box.
+* This library provides all the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/) functionality out of the box.
 
 ---
 
@@ -48,10 +44,14 @@
 
 ### It's important to note a few things
 
-* The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer
+* ⚠️ Starting with Android 15 (API 35+), the system bars color is transparent by default and can't be changed.
+  Therefore, the functionality for changing the system bars color and applying a custom scrim will no longer work.
+  Older versions are intact and they can still utilize the functionality.
+
+* ✨ The library is written with efficiency and flexibility in mind, simply by following an approach based on a Producer
   and Consumer, which integrates really well with Compose.
 
-* Transparent status bar & navigation bar (without a scrim for gesture navigation) are enabled by default, however, to enable Edge-To-Edge, make sure to call the `enableEdgeToEdge()` function in the activity `onCreate()`.
+* ✅ Transparent status bar & navigation bar (without a scrim for gesture navigation) are enabled by default, however, to enable Edge-To-Edge, make sure to call the `enableEdgeToEdge()` function in the activity `onCreate()`.
 ```kotlin
 // ...
 import androidx.activity.enableEdgeToEdge
@@ -72,8 +72,6 @@ class MainActivity : ComponentActivity() {
 
 }
 ```
-
-* Currently, on API >= 35, scrim cannot be applied.
 
 * It's recommended to use a single
   top-level [SystemUIBarsTweaker](./system-ui-bars-tweaker/src/main/java/com/stoyanvuchev/systemuibarstweaker/SystemUIBarsTweaker.kt)
