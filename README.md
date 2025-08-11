@@ -2,6 +2,8 @@
 
 [![](https://jitpack.io/v/stoyan-vuchev/system-ui-bars-tweaker.svg)](https://jitpack.io/#stoyan-vuchev/system-ui-bars-tweaker)
 [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
+[![Last Commit](https://img.shields.io/github/last-commit/stoyan-vuchev/system-ui-bars-tweaker.svg?style=flat&logo=github&logoColor=white)](https://github.com/stoyan-vuchev/system-ui-bars-tweaker/commits/master)
+[![Issues](https://img.shields.io/github/issues-raw/stoyan-vuchev/system-ui-bars-tweaker.svg?style=flat&logo=github&logoColor=white)](https://github.com/stoyan-vuchev/system-ui-bars-tweaker/issues)
 
 > A Jetpack Compose library for Android with easy-to-use utilities to tweak the color, behavior, and visibility of the
 > System UI bars.
