@@ -15,8 +15,8 @@ android {
         applicationId = "com.stoyanvuchev.systemuibarstweaker.demo"
         minSdk = 23
         targetSdk = 36
-        versionCode = 4
-        versionName = "1.2.4"
+        versionCode = 5
+        versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -88,6 +88,7 @@ dependencies {
 
     // Responsive Scaffold
     implementation(libs.stoyan.vuchev.responsive.scaffold)
+    implementation(libs.squircle.shape)
 
     // Serialization
     implementation(libs.google.gson)

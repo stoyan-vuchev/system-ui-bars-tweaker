@@ -33,7 +33,9 @@ android {
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
     }
 
     buildFeatures.compose = true
@@ -47,7 +49,7 @@ afterEvaluate {
 
                 groupId = "com.github.stoyan-vuchev"
                 artifactId = "system-ui-bars-tweaker"
-                version = "1.2.4"
+                version = "1.3.0"
 
                 afterEvaluate {
                     from(components["release"])

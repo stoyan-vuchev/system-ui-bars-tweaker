@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Stoyan Vuchev
+ * Copyright 2023 - 2025 Stoyan Vuchev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import android.view.View
 import android.view.Window
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.retain.retain
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
@@ -64,7 +64,7 @@ fun rememberSystemUIBarsTweaker(
     view: View = LocalView.current,
     window: Window? = WindowUtils.findWindow(view),
     initialConfiguration: SystemUIBarsConfiguration = SystemUIBarsConfiguration.default()
-) = remember<SystemUIBarsTweaker>(view, window) {
+) = retain<SystemUIBarsTweaker>(view, window) {
     SystemUIBarsTweakerImpl(
         view = view,
         initialConfiguration = initialConfiguration,
@@ -107,7 +107,6 @@ interface SystemUIBarsTweaker {
      * Returns the currently applied System Bars Behavior.
      * It should be one of the
      * [WindowInsetsControllerCompat] behavior constants:
-     * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH] (Deprecated),
      * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
      * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
      **/
@@ -174,7 +173,6 @@ interface SystemUIBarsTweaker {
      *
      * @param behavior the behavior should be one of the
      * [WindowInsetsControllerCompat] behavior constants:
-     * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH] (Deprecated),
      * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
      * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
      **/
