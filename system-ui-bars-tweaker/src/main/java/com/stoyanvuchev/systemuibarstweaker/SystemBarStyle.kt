@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Stoyan Vuchev
+ * Copyright 2023 - 2025 Stoyan Vuchev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,19 +35,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Stable
 class SystemBarStyle(
-
     @Serializable(with = ColorSerializer::class)
     val color: Color = Color.Unspecified,
     val darkIcons: Boolean = color.luminance() >= .5f,
-
-    @Deprecated(
-        message = "Consider using the new 'scrimStyle' constructor parameter instead of " +
-                "the old 'enforceContrast' because it will be removed in future releases.",
-        level = DeprecationLevel.WARNING
-    ) val enforceContrast: Boolean = true,
-
     val scrimStyle: ScrimStyle = ScrimStyle.None
-
 ) {
 
     companion object {
@@ -101,16 +92,13 @@ class SystemBarStyle(
      * @param darkIcons whether to use dark icons or not for the system bar.
      * @param scrimStyle applies a scrim style to ensure contrast for the system bar.
      **/
-    @Suppress("Deprecation")
     fun copy(
         color: Color = this.color,
         darkIcons: Boolean = this.darkIcons,
-        enforceContrast: Boolean = this.enforceContrast,
         scrimStyle: ScrimStyle = this.scrimStyle
     ) = SystemBarStyle(
         color = color,
         darkIcons = darkIcons,
-        enforceContrast = enforceContrast,
         scrimStyle = scrimStyle
     )
 
@@ -139,105 +127,3 @@ class SystemBarStyle(
     }
 
 }
-
-/**
- * The default Status Bar [SystemBarStyle] with an optional overriding.
- *
- * @param color the system bar color.
- * @param darkIcons whether to use dark icons or not for the system bar.
- * @param enforceContrast applies a scrim to ensure contrast for the system bar.
- */
-@Deprecated(
-    message = "Consider using the new 'scrimStyle' constructor parameter instead of " +
-            "the old 'enforceContrast' because it will be removed in future releases.",
-    level = DeprecationLevel.WARNING,
-    replaceWith = ReplaceWith(
-        """
-            defaultStatusBarStyle(
-                color: Color,
-                darkIcons: Boolean,
-                scrimStyle: ScrimStyle
-            )
-        """
-    )
-)
-@JvmName("defaultStatusBarStyleDeprecated")
-@Composable
-fun SystemBarStyle.Companion.defaultStatusBarStyle(
-    color: Color = Color.Unspecified,
-    darkIcons: Boolean = !isSystemInDarkTheme(),
-    enforceContrast: Boolean = false
-) = SystemBarStyle(
-    color = color,
-    darkIcons = darkIcons,
-    scrimStyle = if (enforceContrast) ScrimStyle.System else ScrimStyle.None
-)
-
-/**
- * The default Navigation Bar [SystemBarStyle] with an optional overriding.
- *
- * @param color the system bar color.
- * @param darkIcons whether to use dark icons or not for the system bar.
- * @param enforceContrast applies a scrim to ensure contrast for the system bar.
- */
-@Deprecated(
-    message = "Consider using the new 'scrimStyle' constructor parameter instead of " +
-            "the old 'enforceContrast' because it will be removed in future releases.",
-    level = DeprecationLevel.WARNING,
-    replaceWith = ReplaceWith(
-        """
-            defaultNavigationBarStyle(
-                color: Color,
-                darkIcons: Boolean,
-                scrimStyle: ScrimStyle
-            )
-        """
-    )
-)
-@JvmName("defaultNavigationBarStyleDeprecated")
-@Composable
-fun SystemBarStyle.Companion.defaultNavigationBarStyle(
-    color: Color = Color.Unspecified,
-    darkIcons: Boolean = !isSystemInDarkTheme(),
-    enforceContrast: Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.O
-) = SystemBarStyle(
-    color = color,
-    darkIcons = darkIcons,
-    scrimStyle = if (enforceContrast) when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> ScrimStyle.System
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> ScrimStyle.Custom()
-        else -> ScrimStyle.ObsoleteApiStyle
-    } else ScrimStyle.None
-)
-
-/**
- * Creates a copy of the [SystemBarStyle] with an optional overriding.
- *
- * @param color the system bar color.
- * @param darkIcons whether to use dark icons or not for the system bar.
- * @param enforceContrast applies a scrim to ensure contrast for the system bar.
- */
-@Deprecated(
-    message = "Consider using the new 'scrimStyle' constructor parameter instead of " +
-            "the old 'enforceContrast' because it will be removed in future releases.",
-    level = DeprecationLevel.WARNING,
-    replaceWith = ReplaceWith(
-        """
-            copy(
-                color: Color,
-                darkIcons: Boolean,
-                scrimStyle: ScrimStyle
-            )
-        """
-    )
-)
-@JvmName("copyDeprecated")
-fun SystemBarStyle.copy(
-    color: Color = this.color,
-    darkIcons: Boolean = this.darkIcons,
-    enforceContrast: Boolean = this.scrimStyle != ScrimStyle.None
-) = SystemBarStyle(
-    color = color,
-    darkIcons = darkIcons,
-    scrimStyle = if (enforceContrast) ScrimStyle.System else ScrimStyle.None
-)

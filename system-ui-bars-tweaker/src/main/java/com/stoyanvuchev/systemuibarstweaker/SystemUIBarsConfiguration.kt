@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Stoyan Vuchev
+ * Copyright 2023 - 2025 Stoyan Vuchev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ import kotlinx.serialization.Serializable
  *
  * It should be one of the
  * [WindowInsetsControllerCompat] behavior constants:
- * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH] (Deprecated),
  * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
  * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
  **/
@@ -59,7 +58,6 @@ class SystemUIBarsConfiguration(
          *
          * It should be one of the
          * [WindowInsetsControllerCompat] behavior constants:
-         * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH] (Deprecated),
          * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
          * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
          **/
@@ -108,7 +106,6 @@ class SystemUIBarsConfiguration(
      *
      * It should be one of the
      * [WindowInsetsControllerCompat] behavior constants:
-     * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH] (Deprecated),
      * [WindowInsetsControllerCompat.BEHAVIOR_DEFAULT] and
      * [WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE].
      **/
