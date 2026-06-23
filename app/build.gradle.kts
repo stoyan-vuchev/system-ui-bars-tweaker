@@ -8,15 +8,15 @@ plugins {
 android {
 
     namespace = "com.stoyanvuchev.systemuibarstweaker.demo"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
 
         applicationId = "com.stoyanvuchev.systemuibarstweaker.demo"
         minSdk = 23
-        targetSdk = 36
-        versionCode = 5
-        versionName = "1.3.0"
+        targetSdk = 37
+        versionCode = 6
+        versionName = "1.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -40,16 +40,12 @@ android {
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
     }
 
     buildFeatures.compose = true
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 
 }
 

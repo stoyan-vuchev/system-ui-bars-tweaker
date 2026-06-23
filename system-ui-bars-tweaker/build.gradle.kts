@@ -9,7 +9,7 @@ plugins {
 android {
 
     namespace = "com.stoyanvuchev.systemuibarstweaker"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 23
@@ -49,7 +49,7 @@ afterEvaluate {
 
                 groupId = "com.github.stoyan-vuchev"
                 artifactId = "system-ui-bars-tweaker"
-                version = "1.3.0"
+                version = "1.4.0"
 
                 afterEvaluate {
                     from(components["release"])
