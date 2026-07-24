@@ -22,6 +22,8 @@
 
 ## Introduction
 
+* Note: This library customizes the system bars only for the Android app that integrates it. It cannot modify the device's global System UI or affect other apps.
+
 * On August 24th, 2023, the [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller/)
   library was deprecated in favor of the new [Activity.enableEdgeToEdge](https://developer.android.com/reference/androidx/activity/ComponentActivity#(androidx.activity.ComponentActivity).enableEdgeToEdge(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle)) 
   method available in androidx.activity version ``1.8.0-alpha03`` and later.
